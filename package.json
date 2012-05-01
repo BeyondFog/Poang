@@ -11,8 +11,11 @@
     , "bcrypt": ">=0.5.0"
     , "connect-mongo": ">=0.1.9"
     , "connect": ">= 1.8.5 < 2"
-  }
-  , "devDependencies": {
+  },  
+  "engines": {
+        "node": ">= 0.6.14",
+        "npm":  "1.0.x"
+  }, "devDependencies": {
       "mocha": ">=0.11.0"
     , "mock-request": ">=0.1.2"
     , "sandboxed-module": ">=0.1.2"
