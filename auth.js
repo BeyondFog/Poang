@@ -1,7 +1,5 @@
 // Everyauth config for the app
-var aes = require('./aes')
-    , config = require('./config')
-    , mongoose = require('mongoose')
+var mongoose = require('mongoose')
     , mongoose_auth = require('mongoose-auth')
     , Schema = mongoose.Schema
     ;

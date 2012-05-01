@@ -9,15 +9,16 @@ var auth = require('./auth')
     , express = require('express')
     , mongoose = require('mongoose')
     , mongoose_auth = require('mongoose-auth')
-    , mongoStore = require('connect-mongo')
+    , mongoStore = require('connect-mongo')(express)
     , routes = require('./routes')
+    , middleware = require('./middleware')
     ;
 
 
 var HOUR_IN_MILLISECONDS = 3600000;
 var session_store;
 
-var init = exports.init = function (config) {
+var init = exports.init = function () {
   
   var db_uri = process.env.MONGOLAB_URI || "mongodb://localhost/poang";
 
@@ -30,12 +31,12 @@ var init = exports.init = function (config) {
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     app.set('view options', { pretty: true });
-    app.use(middleware.bodySetter);
+
     app.use(express.bodyParser());
     app.use(express.cookieParser());
     app.use(express.methodOverride());
     app.use(express.session({secret: 'top secret', store: session_store,
-      cookie: {maxAge: MONTH_IN_MILLISECONDS}}));
+      cookie: {maxAge: HOUR_IN_MILLISECONDS}}));
     app.use(mongoose_auth.middleware());
     app.use(express.static(__dirname + '/public'));
     app.use(app.router);
@@ -53,7 +54,7 @@ var init = exports.init = function (config) {
   
   // Routes
 
-  app.get('/', routes.index);
+  app.get('/', middleware.require_auth_browser, routes.index);
   
   // the rest of the routes go here
   
@@ -69,8 +70,7 @@ var init = exports.init = function (config) {
 
 // Don't run if require()'d
 if (!module.parent) {
-  var config = require('./config');
-  var app = init(config);
-  app.listen(config.server_port);
+  var app = init();
+  app.listen(process.env.PORT || 3000);
   console.info("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 }
