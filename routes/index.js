@@ -44,3 +44,11 @@ exports.index = function(req, res){
    
    res.redirect('/');
  }
+ 
+ /*
+  * Example function for unit test
+  */
+ 
+exports.timesTwo = function(x){
+   return x*2;
+ }
