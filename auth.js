@@ -4,6 +4,16 @@ var mongoose = require('mongoose')
     , Schema = mongoose.Schema
     ;
 
+
+var CommentSchema = new Schema({
+    body      : String
+  , date      : Date
+});
+
+var Comment = mongoose.model('Comment', CommentSchema);
+
+exports.Comment = Comment;
+
 var user_schema = new Schema({
   account_level: Number
 });

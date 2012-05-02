@@ -55,6 +55,7 @@ var init = exports.init = function () {
   // Routes
 
   app.get('/', middleware.require_auth_browser, routes.index);
+  app.post('/add_comment',middleware.require_auth_browser, routes.add_comment);
   
   // the rest of the routes go here
   
