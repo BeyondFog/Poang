@@ -1,10 +1,8 @@
 /*jshint laxcomma:true */
 
-
 /**
  * Module dependencies.
  */
-
 var auth = require('./auth')
     , express = require('express')
     , mongoose = require('mongoose')
@@ -14,13 +12,12 @@ var auth = require('./auth')
     , middleware = require('./middleware')
     ;
 
-
 var HOUR_IN_MILLISECONDS = 3600000;
 var session_store;
 
 var init = exports.init = function () {
   
-  var db_uri = process.env.MONGOLAB_URI || "mongodb://localhost/poang";
+  var db_uri = process.env.MONGOLAB_URI || process.env.MONGODB_URI || "mongodb://localhost/poang";
 
   mongoose.connect(db_uri);
   session_store = new mongoStore({url: db_uri});
@@ -57,9 +54,7 @@ var init = exports.init = function () {
   app.get('/', middleware.require_auth_browser, routes.index);
   app.post('/add_comment',middleware.require_auth_browser, routes.add_comment);
   
-  // the rest of the routes go here
-  
-  // redirect all non-existent URLs to
+  // redirect all non-existent URLs to doesnotexist
   app.get('*', function onNonexistentURL(req,res) {
     res.render('doesnotexist',404);
   });

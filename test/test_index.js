@@ -15,4 +15,6 @@ describe('index', function() {
       xTimesTwo.should.equal(10);
     });
   });
+
 });
+

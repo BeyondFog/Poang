@@ -21,7 +21,7 @@ exports.index = function(req, res){
 
     res.render('index',
       {
-        title: 'Poang: Index',
+        app_name: 'Poang',
         comments: results
       });
     });
@@ -33,13 +33,11 @@ exports.index = function(req, res){
  
  exports.add_comment = function(req,res){
 
+   var date = new Date();
    var comment = new auth.Comment;
    
    comment.body = req.param('body');
-
-   var date = new Date();
    comment.date = date.getTime();
-   
    comment.save();
    
    res.redirect('/');
