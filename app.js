@@ -15,9 +15,9 @@ var auth = require('./auth')
 var HOUR_IN_MILLISECONDS = 3600000;
 var session_store;
 
-var init = exports.init = function () {
+var init = exports.init = function (config) {
   
-  var db_uri = process.env.MONGOLAB_URI || process.env.MONGODB_URI || "mongodb://localhost/poang";
+  var db_uri = process.env.MONGOLAB_URI || process.env.MONGODB_URI || config.default_db_uri;
 
   mongoose.connect(db_uri);
   session_store = new mongoStore({url: db_uri});
@@ -66,7 +66,8 @@ var init = exports.init = function () {
 
 // Don't run if require()'d
 if (!module.parent) {
-  var app = init();
+  var config = require('./config');
+  var app = init(config);
   app.listen(process.env.PORT || 3000);
   console.info("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 }
