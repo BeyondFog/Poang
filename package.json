@@ -22,6 +22,6 @@
     , "zombie": ">= 0.12.15"    
   }
   , "scripts": {
-      "test": "mocha -R tap --ignore-leaks"
+      "test": "mocha -R tap --globals o,section,data,m,k,i"
   }
 }

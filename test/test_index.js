@@ -1,5 +1,4 @@
-var assert = require('assert')
-  , should = require('should')
+var should = require('should')
   , index = require('../routes/index')
   ;
   
@@ -11,6 +10,5 @@ describe('index', function() {
       xTimesTwo.should.equal(10);
     });
   });
-
 });
 

@@ -7,49 +7,43 @@ var assert = require('assert')
   , mongoose = require('mongoose')
   ;
 
-var TEST_PORT = Math.floor(Math.random()*64511 + 1024);
+var TEST_PORT = Math.floor(Math.random()*61439 + 4096);
 var base_url = "http://localhost:" + TEST_PORT + "/";
-var test_email = "testuser-" + Math.floor(Math.random()*1000000) + "@example.com";
+var test_email = "testuser@example.com";
 
 before(function() {
    var server = app.init(config);
+   
+   // should check to see if something is listening on the port first
    server.listen(TEST_PORT);
    console.log("Server is listening on port %s", TEST_PORT);
  });
 
-after(function(done) {
-
+after(function() {
   var db_uri = process.env.MONGOLAB_URI || process.env.MONGODB_URI || config.default_db_uri;
-  console.log("db_uri: " + db_uri);
-  
   mongoose.connect(db_uri);
-
-  mongoose.connection.collections['users'].drop( function(err) {
-    if (err) throw err;
-    console.log("dropped users collection");
-    done();
-  });
   
+  // drop database
+  mongoose.connection.db.executeDbCommand( {dropDatabase:1}, function() {
+    console.log("Dropped test database.");	
+  });
 })
 
 describe('front page', function() {
   it('should load', function (done) {
-    this.timeout(3000);
     var browser = new zombie();
     browser.visit(base_url, function () {
-      assert.ok(browser.success);
+      browser.success.should.be.ok;
       if (browser.error) {
         console.dir("errors reported:", browser.errors);
       }
     done();
     });
-  });
-  
+  }); 
   it('should have the page title Poang', function(done) {
-    this.timeout(3000);
     var browser = new zombie();
     browser.visit(base_url, function () {
-      assert.equal(browser.text("title"), "Poang");      
+      browser.text("title").should.eql("Poang");      
       if (browser.error) {
         console.dir("errors reported:", browser.errors);
       }
@@ -57,13 +51,11 @@ describe('front page', function() {
     });
   });
 });
-
 describe('registration', function () {
   it('should successfully register', function (done) {
-    this.timeout(3000);
     var browser = new zombie();
     browser.visit(base_url + "register", function () {
-      assert.ok(browser.query("#register"));
+      browser.query("#register").should.be.ok;
       // Fill email, password and submit form
       browser.
         fill("email", test_email).
@@ -71,12 +63,10 @@ describe('registration', function () {
         pressButton("register", function() {
 
           // Form submitted, new page loaded.
-          assert.ok(browser.success);
-          assert.equal(browser.location.pathname, "/");
+          browser.success.should.be.ok;
+          browser.location.pathname.should.eql("/");
           done();
         });    
-
     });
   });
-
 });

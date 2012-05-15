@@ -14,11 +14,7 @@ var Comment = mongoose.model('Comment', CommentSchema);
 
 exports.Comment = Comment;
 
-var user_schema = new Schema({
-  account_level: Number
-});
-
-var user;
+var user_schema = new Schema();
 
 user_schema.plugin(mongoose_auth, {
   everymodule: {
@@ -61,6 +57,5 @@ user_schema.plugin(mongoose_auth, {
 });
 
 mongoose.model('user', user_schema);
-user = mongoose.model('user');
-
+var user = mongoose.model('user');
 exports.user = user;
