@@ -1,4 +1,4 @@
-# Poang - A sample node.js/MongoDB app for Strider &amp; Heroku/MongoLab
+## Poang - A sample node.js/MongoDB app for Strider &amp; Heroku/MongoLab
 
 Poang demonstrates a few of the ways that we write tests in Node.js for Strider (Strider is a hosted continuous deployment platform for Node.js and Python. Learn more at [StriderApp.com](http://striderapp.com)).
 
