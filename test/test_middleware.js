@@ -1,5 +1,4 @@
-var auth = require('../auth')
-  , middleware = require('../middleware')
+var middleware = require('../middleware')
   , should = require('should')
   , sinon = require('sinon')
   ;
