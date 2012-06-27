@@ -13,7 +13,7 @@
     , "connect": ">= 1.8.5 < 2"
   },  
   "engines": {
-        "node": ">= 0.6.14",
+        "node": "0.6.X",
         "npm":  "1.0.x"
   }, "devDependencies": {
       "mocha": ">=0.11.0"
