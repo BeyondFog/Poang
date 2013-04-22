@@ -5,7 +5,7 @@
   , "dependencies": {
       "express": "2.x"
     , "jade": ">= 0.0.1"
-    , "mongoose-auth": "git://github.com/cbou/mongoose-auth.git"
+    , "mongoose-auth": "git://github.com/cbou/mongoose-auth.git#everymodule-fix"
     , "mongoose": ">=2.5.1"
     , "everyauth": ">=0.2.30"
     , "bcrypt": ">=0.5.0"
