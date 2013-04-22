@@ -3,7 +3,7 @@
   , "version": "0.0.1"
   , "private": false
   , "dependencies": {
-      "express": "2.5.8"
+      "express": "2.x"
     , "jade": ">= 0.0.1"
     , "mongoose-auth": ">=0.0.11"
     , "mongoose": ">=2.5.1"
