@@ -15,7 +15,7 @@ exports.index = function(req, res){
   auth.Comment.find()
       .sort('-date')
       .limit(20)
-      .run(function(err, results)
+      .exec(function(err, results)
   {
     if (err) throw err;
 
