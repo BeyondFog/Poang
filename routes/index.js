@@ -13,7 +13,7 @@ var auth = require('../auth');
 exports.index = function(req, res){
   
   auth.Comment.find()
-      .sort('date',-1)
+      .sort('-date')
       .limit(20)
       .run(function(err, results)
   {
