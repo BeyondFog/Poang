@@ -39,7 +39,7 @@ user_schema.plugin(mongoose_auth, {
         , registerLocals: {product:'Strider', page:'Sample node.js / express / everyauth / mongodb app for Strider and Heroku', code:''}
         , registerUser: function (newUserAttributes) {
           var promise = this.Promise();
-          mongoose.model('user').create(newUserAttributes, function (err, createdUser) {
+          mongoose.model('User').create(newUserAttributes, function (err, createdUser) {
             if (err) {
               console.log(err);
               if (/duplicate key/.test(err)) {
@@ -56,6 +56,6 @@ user_schema.plugin(mongoose_auth, {
 
 });
 
-mongoose.model('user', user_schema);
-var user = mongoose.model('user');
+mongoose.model('User', user_schema);
+var user = mongoose.model('User');
 exports.user = user;
